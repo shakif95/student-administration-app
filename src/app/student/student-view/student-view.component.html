@@ -1,0 +1,26 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="my-1">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{student.lastName}}
+    </mat-panel-title>
+    <mat-panel-description>
+      <span class="pull-right">{{student.status}}</span>    
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-grid-list cols="4" rowHeight="8:1" class="custom-tile">
+    <mat-grid-tile>Name: </mat-grid-tile>
+    <mat-grid-tile colspan="3">{{student.firstName}} {{student.lastName}}</mat-grid-tile>
+    <mat-grid-tile>Matriculation #: </mat-grid-tile>
+    <mat-grid-tile colspan="3">{{student.matriculation}}</mat-grid-tile>
+    <mat-grid-tile>Semester: {{student.semester}}</mat-grid-tile>
+    <mat-grid-tile>ECTS completed: {{student.ects}}</mat-grid-tile>
+  </mat-grid-list>
+  <div fxLayoutAlign="center">
+    <button mat-stroked-button color="primary" class="mr-1 my-1">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+    </button>
+    <button mat-stroked-button color="accent" class="my-1">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+    </button>
+  </div>
+</mat-expansion-panel>
