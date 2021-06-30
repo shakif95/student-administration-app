@@ -1,5 +1,10 @@
 # StudentAdministrationApp
 
+## Development server
+ - default url: `http://localhost:4200`
+ - On `Sign in` page any username & password is accepted
+ - The `Dashboard` cannot be browsed without a username
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
 
 ## Development server

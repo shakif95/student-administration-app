@@ -6,49 +6,51 @@
     <mat-card-content>
       <mat-grid-list cols="2" rowHeight="8:1">
         <mat-grid-tile>
-            <input matInput placeholder="First Name" formControlName="firstName">
+          <input matInput placeholder="First Name" formControlName="firstName">
           <div *ngIf="submitted && formData.firstName.errors" class="invalid-feedback">
             <div *ngIf="formData.firstName.errors.required">Required</div>
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <input matInput placeholder="Last Name" formControlName="lastName">
+          <input matInput placeholder="Last Name" formControlName="lastName">
           <div *ngIf="submitted && formData.lastName.errors" class="invalid-feedback">
             <div *ngIf="formData.lastName.errors.required">Required</div>
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <input matInput  placeholder="Matriculation #" formControlName="matriculation">
+          <input matInput placeholder="Matriculation #" formControlName="matriculation">
           <div *ngIf="submitted && formData.matriculation.errors" class="invalid-feedback">
             <div *ngIf="formData.matriculation.errors.required">Required</div>
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <input matInput placeholder="ECTS (completed)"  formControlName="ects">
+          <input matInput placeholder="ECTS (completed)" formControlName="ects">
           <div *ngIf="submitted && formData.ects.errors" class="invalid-feedback">
             <div *ngIf="formData.ects.errors.required">Required</div>
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <input matInput placeholder="Current or last semester" formControlName="semester">
+          <input matInput placeholder="Current or last semester" formControlName="semester">
           <div *ngIf="submitted && formData.semester.errors" class="invalid-feedback">
             <div *ngIf="formData.semester.errors.required">Required</div>
             <div *ngIf="formData.semester.errors.pattern">Number only</div>
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <mat-select formControlName="status">
-              <mat-option value="Enrolled">Enrolled</mat-option>
-              <mat-option value="Graduated">Graduated</mat-option>
-            </mat-select>
-            <div *ngIf="submitted && formData.status.errors" class="invalid-feedback">
-              <div *ngIf="formData.status.errors.required">Required</div>
-            </div>
+          <mat-select formControlName="status">
+            <mat-option value="Enrolled">Enrolled</mat-option>
+            <mat-option value="Graduated">Graduated</mat-option>
+          </mat-select>
+          <div *ngIf="submitted && formData.status.errors" class="invalid-feedback">
+            <div *ngIf="formData.status.errors.required">Required</div>
+          </div>
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>
-    <button mat-stroked-button color="primary" class="btn-block" type="submit">{{ student && student.id ? "Update" : "Add" }}</button>
-    <button mat-stroked-button color="accent" class="btn-block" (click)="onCancel()" type="button">Cancel</button>
+    <div fxLayoutAlign="center">
+      <button mat-stroked-button color="primary" class="btn-block mr-1" type="submit">{{ student && student.id ? "Update" :
+        "Add" }}</button>
+      <button mat-stroked-button color="accent" class="btn-block" (click)="onCancel()" type="button">Cancel</button>
+    </div>
   </form>
 </mat-card>
-

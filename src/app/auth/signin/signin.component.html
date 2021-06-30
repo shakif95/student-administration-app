@@ -7,18 +7,14 @@
     <form class="example-form form-width" [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-card-content>
         <div>
-          <mat-form-field class="example-full-width">
             <input matInput placeholder="username" formControlName="username">
-          </mat-form-field>
           <div *ngIf="submitted && formData.username.errors" class="invalid-feedback">
             <div *ngIf="formData.username.errors.required">Required</div>
           </div>
         </div>
 
         <div>
-          <mat-form-field class="example-full-width">
             <input matInput placeholder="Password" type="password" formControlName="password">
-          </mat-form-field>
         </div>
         <div *ngIf="submitted && formData.password.errors" class="invalid-feedback">
           <div *ngIf="formData.password.errors.required">Required</div>
