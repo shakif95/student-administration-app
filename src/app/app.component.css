@@ -1,3 +1,7 @@
 .container {
   width: 75%;
 }
+
+.pull-right {
+  margin-left: auto;
+}

@@ -1,9 +1,11 @@
-<mat-toolbar color="primary" class="app-header">
-  <div><a href="#" target="_blank" class="positronx">{{title}}</a></div>
-  <!-- <span class="nav-tool-items">
-    <a mat-button routerLink="signin" routerLinkActive="active">Signin</a>
-    <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Signup</a>
-  </span> -->
-</mat-toolbar>
+<div fxLayout="row" flexLayoutAlign="space-between">
+  <mat-toolbar color="primary" class="app-header">
+    <div><a href="#" target="_blank" class="positronx">{{title}}</a></div>
+    <span class="nav-tool-items pull-right">
+      <span>Hi, {{username}}  </span>
+      <button mat-button mat-raised-button color="accent" (click)="onSignOut()">Sign out</button>
+    </span>
+  </mat-toolbar>
+</div>
 
 <router-outlet></router-outlet>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Student } from '../student.model';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-student-form',
@@ -9,20 +11,33 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class StudentFormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
+  @Input() student: Student;
+
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService) {
+    
     this.form = this.formBuilder.group(
       {
-        matriculation: ['', Validators.required, Validators.minLength(6), Validators.pattern('/^\d+$/')],
+        id: null,
+        matriculation: ['', Validators.required],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        ects: ['', Validators.required, Validators.pattern('/^\d+$/')],
+        ects: ['', Validators.required],
         status: ['Enrolled', Validators.required],
-        semester: ['', Validators.required, Validators.pattern('/^\d+$/')]
+        semester: ['', Validators.required]
       }
     )
    }
 
   ngOnInit(): void {
+    this.form.setValue({
+      id: this.student.id,
+      firstName: this.student.firstName,
+      lastName: this.student.lastName,
+      status: this.student.status,
+      semester: this.student.semester,
+      ects: this.student.ects,
+      matriculation: this.student.matriculation
+    });
   }
 
   get formData(): { [key: string]: AbstractControl } {
@@ -33,11 +48,21 @@ export class StudentFormComponent implements OnInit {
     this.submitted = true;
     
     if (this.form.invalid) {
+      console.log(this.formData);
       return;
     }
     
-    // TODO: add service for saving username in localstorage
+    const student: Student = this.form.value;
+    if(this.student.id){
+      this.studentService.update({
+        ...student,
+        id: this.student.id
+      });
+    }else{
+      this.studentService.add(student);
+    }
     console.log(JSON.stringify(this.form.value, null, 2));
+    window.location.reload(); // had to force it because reading data from localStorage
   }
 
 }

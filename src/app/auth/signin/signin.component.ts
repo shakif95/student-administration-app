@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Auth } from '../auth.model';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -11,7 +14,11 @@ export class SigninComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private router: Router
+    ) {
     this.form = this.formBuilder.group(
       {
         username: ['', Validators.required],
@@ -35,7 +42,14 @@ export class SigninComponent implements OnInit {
       return;
     }
     
+    const auth: Auth = {
+      username: this.form.value.username,
+      password: this.form.value.password,
+    }
     // TODO: add service for saving username in localstorage
+    this.authService.signIn(auth);
+    //this.router.navigate(['/dashboard']);
+    this.router.navigateByUrl('/dashboard');
     console.log(JSON.stringify(this.form.value, null, 2));
   }
 

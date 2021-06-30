@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Student } from '../student.model';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-student-list',
@@ -9,34 +12,37 @@ import { Student } from '../student.model';
 export class StudentListComponent implements OnInit {
   title="Students"
   showStudentForm = false;
-  students: Student[] = [
-    {
-      id: 1,
-      matriculation: 123456,
-      firstName: 'John',
-      lastName: 'Doe',
-      ects: 125,
-      semester: 6,
-      status: 'Enrolled'
-    },
-    {
-      id: 2,
-      matriculation: 987654,
-      firstName: 'Alex',
-      lastName: 'Farguson',
-      ects: 210,
-      semester: 9,
-      status: 'Graduated'
-    }
-  ];
-  
+  students: Student[] = [];
+  newStudent: Student;
 
-  constructor() { }
+  constructor(
+    private studentService: StudentService, 
+    private authService: AuthService,
+    private router: Router
+  ) { 
+    this.newStudent = {
+      ects: 0,
+      firstName: '',
+      lastName: '',
+      matriculation: 0,
+      semester: 0,
+      status: 'Enrolled'
+    }
+  }
 
   ngOnInit(): void {
+    this.getStudents();
   }
 
   onClickAdd = () => {
     this.showStudentForm = true;
+  }
+
+  getStudents = () => {
+    this.studentService.getAll()
+      .subscribe(
+        (data: Student[]) => this.students = data,
+        error => console.log(error)
+      )
   }
 }

@@ -1,6 +1,6 @@
 <mat-card class="box">
   <mat-card-header>
-    <mat-card-title>New Student</mat-card-title>
+    <mat-card-title>{{student && student.lastName ? "Edit Student" : "New Student"}}</mat-card-title>
   </mat-card-header>
   <form class="example-form form-width" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-card-content>
@@ -23,7 +23,7 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
-            <input matInput type="number" placeholder="Matriculation #" formControlName="matriculation">
+            <input matInput  placeholder="Matriculation #" formControlName="matriculation">
           </mat-form-field>
           <div *ngIf="submitted && formData.matriculation.errors" class="invalid-feedback">
             <div *ngIf="formData.matriculation.errors.required">Required</div>
@@ -31,7 +31,7 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
-            <input matInput placeholder="ECTS (completed)" type="number" formControlName="ects">
+            <input matInput placeholder="ECTS (completed)"  formControlName="ects">
           </mat-form-field>
           <div *ngIf="submitted && formData.ects.errors" class="invalid-feedback">
             <div *ngIf="formData.ects.errors.required">Required</div>
@@ -60,8 +60,8 @@
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>
-    <button mat-stroked-button color="primary" class="btn-block" type="submit">Add</button>
-    <button mat-stroked-button color="accent" class="btn-block" type="submit">Cancel</button>
+    <button mat-stroked-button color="primary" class="btn-block" type="submit">{{ student && student.id ? "Update" : "Add" }}</button>
+    <button mat-stroked-button color="accent" class="btn-block" type="reset">Cancel</button>
   </form>
 </mat-card>
 

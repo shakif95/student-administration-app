@@ -9,8 +9,11 @@
       </span>
     </div>
     <mat-accordion>
-      <app-student-form *ngIf="showStudentForm" ></app-student-form>
+      <app-student-form *ngIf="showStudentForm" [student]="newStudent"></app-student-form>
       <app-student-view *ngFor="let student of students" [student]="student"></app-student-view>
     </mat-accordion>
+    <div *ngIf="students.length === 0 && showStudentForm===false" fxLayoutAlign="center">
+      <h4>No Students Found</h4>
+    </div>
   </div>
 </div>
