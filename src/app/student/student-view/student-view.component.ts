@@ -29,4 +29,8 @@ export class StudentViewComponent implements OnInit {
     window.location.reload();
   }
 
+  onCancel = (close: boolean) => {
+    this.showEditForm = close;
+  }
+
 }

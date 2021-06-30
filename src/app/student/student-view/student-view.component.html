@@ -28,5 +28,5 @@
     </div>
   </div>
 
-  <app-student-form [student]="editableStudent" *ngIf="showEditForm"></app-student-form>
+  <app-student-form [student]="editableStudent" *ngIf="showEditForm" (cancelForm)="onCancel($event)"></app-student-form>
 </mat-expansion-panel>

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
 import { Student } from '../student.model';
 import { StudentService } from '../student.service';
 
@@ -16,9 +14,7 @@ export class StudentListComponent implements OnInit {
   newStudent: Student;
 
   constructor(
-    private studentService: StudentService, 
-    private authService: AuthService,
-    private router: Router
+    private studentService: StudentService,
   ) { 
     this.newStudent = {
       ects: 0,
@@ -36,6 +32,10 @@ export class StudentListComponent implements OnInit {
 
   onClickAdd = () => {
     this.showStudentForm = true;
+  }
+
+  onCancelForm = (close: boolean) => {
+    this.showStudentForm = close;
   }
 
   getStudents = () => {

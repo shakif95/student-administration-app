@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from '../student.model';
 import { StudentService } from '../student.service';
@@ -12,6 +12,7 @@ export class StudentFormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   @Input() student: Student;
+  @Output() cancelForm = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService) {
     
@@ -30,13 +31,13 @@ export class StudentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.setValue({
-      id: this.student.id,
+      id: this.student.id ?? null,
       firstName: this.student.firstName,
       lastName: this.student.lastName,
       status: this.student.status,
-      semester: this.student.semester,
-      ects: this.student.ects,
-      matriculation: this.student.matriculation
+      semester: this.student.semester === 0 ? '' : this.student.semester,
+      ects: this.student.ects === 0 ? '' : this.student.ects,
+      matriculation: this.student.matriculation === 0 ? '' : this.student.matriculation
     });
   }
 
@@ -63,6 +64,11 @@ export class StudentFormComponent implements OnInit {
     }
     console.log(JSON.stringify(this.form.value, null, 2));
     window.location.reload(); // had to force it because reading data from localStorage
+  }
+
+  onCancel = () => {
+    //@ts-ignore
+    this.cancelForm.emit(false);
   }
 
 }
