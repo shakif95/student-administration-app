@@ -46,11 +46,9 @@ export class SigninComponent implements OnInit {
       username: this.form.value.username,
       password: this.form.value.password,
     }
-    // TODO: add service for saving username in localstorage
+
     this.authService.signIn(auth);
-    //this.router.navigate(['/dashboard']);
-    this.router.navigateByUrl('/dashboard');
-    console.log(JSON.stringify(this.form.value, null, 2));
+    this.router.navigate(['/dashboard']);
   }
 
 }

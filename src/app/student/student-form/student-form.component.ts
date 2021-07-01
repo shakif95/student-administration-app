@@ -49,7 +49,6 @@ export class StudentFormComponent implements OnInit {
     this.submitted = true;
     
     if (this.form.invalid) {
-      console.log(this.formData);
       return;
     }
     
@@ -62,8 +61,7 @@ export class StudentFormComponent implements OnInit {
     }else{
       this.studentService.add(student);
     }
-    console.log(JSON.stringify(this.form.value, null, 2));
-    window.location.reload(); // had to force it because reading data from localStorage
+    window.location.reload(); // had to force it because of reading data from localStorage
   }
 
   onCancel = () => {

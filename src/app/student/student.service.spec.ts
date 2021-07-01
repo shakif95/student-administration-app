@@ -21,10 +21,27 @@ describe('StudentService', () => {
     };
     students = SeedStudents;
     localStorage.clear();
+    localStorage.setItem('students', JSON.stringify(students));
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should get all the students sucessfully', () => {
+    service.getAll().subscribe(
+      retrievedStudents => expect(retrievedStudents).toEqual(students)
+    );
+  });
+
+  it('should remove student sucessfully', () => {
+    const count = JSON.parse(localStorage.getItem('students')).length;
+    service.add(student);
+    expect(service.students.length).toBe(count+1);
+
+    const toBeRemovedStudent = students[1];
+    service.remove(toBeRemovedStudent.id);
+    expect(service.students.length).toBe(count);
   });
 
   it('should add student sucessfully', () => {
@@ -32,30 +49,16 @@ describe('StudentService', () => {
     expect(JSON.parse(localStorage.getItem('students')).length).toBe(3);
   });
 
-  it('should remove student sucessfully', () => {
-    service.add(student);
-    expect(JSON.parse(localStorage.getItem('students')).length).toBe(3);
-
-    const toBeRemovedStudent = students[2];
-    service.remove(toBeRemovedStudent.id);
-    expect(JSON.parse(localStorage.getItem('students')).length).toBe(2);
-  });
-
-  it('should get all the students sucessfully', () => {
-    service.getAll().subscribe(
-      retrievedStudents => expect(retrievedStudents).toBe(students)
-    );
-  });
-
   it('should update student sucessfully', () => {
+    const firstStudent = service.students[0];
     const toBeUpdatedStudent = {
-      ...students[2],
+      ...firstStudent,
       matriculation: 555555
     }
 
     service.update(toBeUpdatedStudent);
-
-    expect(JSON.parse(localStorage.getItem('students'))[1].id).toBe(toBeUpdatedStudent.id);
-    expect(JSON.parse(localStorage.getItem('students'))[1].matriculation).toBe(toBeUpdatedStudent.matriculation);
+    const studentAfterUpdate = service.students.find(student => student.id === toBeUpdatedStudent.id);
+    expect(studentAfterUpdate.id).toBe(toBeUpdatedStudent.id);
+    expect(studentAfterUpdate.matriculation).toBe(toBeUpdatedStudent.matriculation);
   });
 });
