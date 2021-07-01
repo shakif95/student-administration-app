@@ -10,11 +10,11 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent implements OnInit {
   title = 'Student Administration';
   username = "Admin";
-
+  authenticated = false;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.authenticated = this.authService.isAuthenticated();
   }
 
   onSignOut = (): void => {

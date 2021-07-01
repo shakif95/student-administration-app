@@ -1,6 +1,6 @@
 # StudentAdministrationApp
 
-## Development server
+## How to Guide
  - default url: `http://localhost:4200`
  - On `Sign in` page any username & password is accepted
  - The `Dashboard` cannot be browsed without a username

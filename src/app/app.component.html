@@ -1,7 +1,7 @@
 <div fxLayout="row" flexLayoutAlign="space-between">
   <mat-toolbar color="primary" class="app-header">
     <div><a href="#" target="_blank" class="positronx">{{title}}</a></div>
-    <span class="nav-tool-items pull-right">
+    <span class="nav-tool-items pull-right" *ngIf="authenticated">
       <span>Hi, {{username}}  </span>
       <button mat-button mat-raised-button color="accent" (click)="onSignOut()">Sign out</button>
     </span>
